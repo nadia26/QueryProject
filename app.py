@@ -1,10 +1,13 @@
 from flask import Flask,render_template
-
+import google
+#HOW TO USE THE GOOGLE LIBRARY
 app = Flask(__name__)
 
 @app.route("/")
 def page():
-    #return "hi"
+    return google.search(query="hi",start=0,stop=10)
+    #^ says generator object is not callable
+
     return render_template("home.html")
 
 @app.route("/data")
