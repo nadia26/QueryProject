@@ -5,6 +5,7 @@ from google import search
 app = Flask(__name__)
 
 @app.route("/")
+@app.route("/home")
 def page():
     #return google.search(query="hi",start=0,stop=10)
     #^ says generator object is not callable
@@ -18,9 +19,15 @@ def data():
     if button == "Search": #it will always be, if there's only one button
         #for url in search(query, num=10, stop=1): #default pause=2.0
            # print(url)
-        search_results10 = [url for url in search(query,num=10,stop=1)]
-        print search_results10
-    return "this is the data page"
+        if (len(query)>0):
+            search_results10 = [url for url in search(query,num=10,stop=1)]
+            #do more stuff
+        
+            return "this is the data page"
+        else:
+            return render_template("/error.html")
+
+
 
 if __name__=="__main__":
     app.debug=True
