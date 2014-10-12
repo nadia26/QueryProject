@@ -1,17 +1,25 @@
-from flask import Flask,render_template
-import google
+from flask import Flask,render_template, request
+#import google
+from google import search
 #HOW TO USE THE GOOGLE LIBRARY
 app = Flask(__name__)
 
 @app.route("/")
 def page():
-    return google.search(query="hi",start=0,stop=10)
+    #return google.search(query="hi",start=0,stop=10)
     #^ says generator object is not callable
 
     return render_template("home.html")
 
 @app.route("/data")
 def data():
+    button = request.args.get("b",None)
+    query = request.args.get("query",None)
+    if button == "Search": #it will always be, if there's only one button
+        #for url in search(query, num=10, stop=1): #default pause=2.0
+           # print(url)
+        search_results10 = [url for url in search(query,num=10,stop=1)]
+        print search_results10
     return "this is the data page"
 
 if __name__=="__main__":
