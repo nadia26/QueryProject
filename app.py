@@ -3,6 +3,9 @@ from google import search
 from bs4 import BeautifulSoup
 import urllib3
 import io
+from collections import Counter
+import namefinder
+
 
 app = Flask(__name__)
 
@@ -25,7 +28,12 @@ def data():
             #search_results10 = search(query, stop=25)
 
 ##Dictionary of names and occurrences
-            names = {}
+            names = []
+            #"real" names
+            femaleNames = namefinder.makeList("namefinder/femalenames.txt")
+            maleNames = namefinder.makeList("namefinder/malenames.txt")
+            validlasts = namefinder.makeList("namefinder/surnames.txt")
+            validfirsts = femaleNames + maleNames
             tagless_text = ""
             print search_results10
             
@@ -38,15 +46,16 @@ def data():
 
                 soup = BeautifulSoup(raw_text)
                 #tagless_text += " ".join([str(x) for x in soup.find_all('p')]) #Way too slow
-                tagless_text += soup.get_text() #still really slow and doesn't always work
-                ############################## processing can happen here
+                tagless_text = soup.get_text() #still really slow and doesn't always work
+                names += namefinder.findNames(tagless_text, validfirsts, validlasts)
 
                 #if (search contains who...)
                 #else if (search contains when...)
                 
             #name = tagless_text #testing...
 
-            name = "testing name"
+            name = Counter(names)
+            name = name.most_common(1)[0][0]
             # CHANGE name TO THE NAME TO BE DISPLAYED
             # if (search contains who...)
             return render_template("result.html",query=query,name=name)
