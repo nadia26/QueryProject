@@ -40,27 +40,48 @@ dates = []
 def analyzedata(data):
 	#run through all the regex's
 	a = re.findall(regex1,data,flags = 0)
+	for x in a:
+		x= x.split('/')
 	b = re.findall(regex2,data,flags = 0)
+	for x in b:
+		x= x.split('/')
 	c = re.findall(regex3,data,flags = 0)
+	for x in c:
+		x = x.split('-')
 	d = re.findall(regex4,data,flags = 0)
+	for x in d:
+		x = x.split('-')
 	#e = re.findall(regex5,data,flags = 0)
 	dates = a+b+c+d
+
+
 
 translateddates = []
 #uses the monthvalues to convert all the data into one format
 #not sure how to complete this function
 def translatedata():
+	#x is a list [__,___,_____]
 	for x in dates:
-		for y in range(12):
-			#convert using the monthvalues to one format that's going to be read by readdata()	
+		#y is the string that needs to be translated
+		qwerty=[]
+		for y in x:
+			replacement = y
+			for a in range(12):
+				asdf = monthvalues[a+1]
+				if y in asdf:
+					replacement = a+1
+			qwerty.append(replacement)
+				#convert using the monthvalues to one format that's going to be read by readdata()	
+		translateddates.append(qwerty)
 
 finaldata={}
 def readdata():
-	for x in translateddates:
-		if x in finaldata.keys():
-			finaldata[x]=finaldata[x]+1
-		else:
-			finaldata[x]=1
+	for a in translateddates:
+		for x in a:
+			if x in finaldata.keys():
+				finaldata[x]=finaldata[x]+1
+			else:
+				finaldata[x]=1
 
 def giveanswer():
 	max = 0
