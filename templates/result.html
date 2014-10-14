@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Search Result</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="static/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css" rel="stylesheet">
+
+  </head>
+  <style>
+body {
+  padding: 65px;
+}
+  </style>
+  <body role="document">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/home">Home</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container theme-showcase" role="main">
+      
+      <div class="well">
+	<p>
+	  <strong>Your search query </strong>{{query}}<strong> yields the following best result: </strong>{{name}} <!--so far this is just for names-->
+	</p>
+      </div>
+
+    </div>
+      
+      
+</body>
+</html>
