@@ -44,10 +44,9 @@ def data():
                 #if (search contains who...)
                 #else if (search contains when...)
                 
-            #return "this is the data page"
-            name = tagless_text
+            #name = tagless_text #testing...
 
-
+            name = "testing name"
             # CHANGE name TO THE NAME TO BE DISPLAYED
             # if (search contains who...)
             return render_template("result.html",query=query,name=name)
