@@ -18,9 +18,7 @@ def data():
     if button == "Search": #it will always be, if there's only one button
         if (len(query)>0): #as long as text is in box, len(query)>1
             
-            ## SO FAR WE WILL ONLY DEAL WITH "who". When dealing with datefinder, make an if statement here:
-            ## if (search contains who...)
-            ## else if (search contains when...)
+            ## SO FAR WE WILL ONLY DEAL WITH "who". When dealing with datefinder, make an if statement inside the loop.
 
             ##Top 10 results
             search_results10 = [str(url) for url in search(query,start=1,stop=10,pause=1.0)]             
@@ -43,12 +41,17 @@ def data():
                 tagless_text += soup.get_text() #still really slow and doesn't always work
                 ############################## processing can happen here
 
+                #if (search contains who...)
+                #else if (search contains when...)
                 
             #return "this is the data page"
             name = tagless_text
 
+
             # CHANGE name TO THE NAME TO BE DISPLAYED
+            # if (search contains who...)
             return render_template("result.html",query=query,name=name)
+            #else if (search contains when...) return render_template("results.html",query=query,name=date) where date is a variable set to be the date
         else:
             return render_template("/error.html")
 
