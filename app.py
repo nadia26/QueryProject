@@ -18,22 +18,37 @@ def data():
     if button == "Search": #it will always be, if there's only one button
         if (len(query)>0): #as long as text is in box, len(query)>1
             
-            ## SO FAR WE WILL ONLY DEAL WITH "who"
+            ## SO FAR WE WILL ONLY DEAL WITH "who". When dealing with datefinder, make an if statement here:
+            ## if (search contains who...)
+            ## else if (search contains when...)
 
             ##Top 10 results
-            search_results10 = [url for url in search(query,num=10,stop=1)]             
-            ##Dictionary of names and occurrences
+            search_results10 = [str(url) for url in search(query,start=1,stop=10,pause=1.0)]             
+            #search_results10 = search(query, stop=25)
+
+##Dictionary of names and occurrences
             names = {}
+            tagless_text = ""
+            print search_results10
+            
 
             #Process the text in each link
             for link in search_results10:
                 #parse text
-                raw_text = urllib3.connection_from_url(link).urlopen('GET',link).data
+                
+                raw_text = urllib3.connection_from_url(link).urlopen('GET',link).data #this bothers me
+
                 soup = BeautifulSoup(raw_text)
-                tagless_text = soup.get_text()
-                                
-        
-            return "this is the data page"
+                #tagless_text += " ".join([str(x) for x in soup.find_all('p')]) #Way too slow
+                tagless_text += soup.get_text() #still really slow and doesn't always work
+                ############################## processing can happen here
+
+                
+            #return "this is the data page"
+            name = tagless_text
+
+            # CHANGE name TO THE NAME TO BE DISPLAYED
+            return render_template("result.html",query=query,name=name)
         else:
             return render_template("/error.html")
 
