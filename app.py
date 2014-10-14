@@ -31,10 +31,7 @@ def data():
                 raw_text = urllib3.connection_from_url(link).urlopen('GET',link).data
                 soup = BeautifulSoup(raw_text)
                 tagless_text = soup.get_text()
-                print tagless_text
-                
-            #do more stuff?
-            print search_results10
+                                
         
             return "this is the data page"
         else:
